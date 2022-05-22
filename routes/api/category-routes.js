@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const { regexp } = require('sequelize/types/lib/operators');
-const { Category, Product, ProductTag } = require('../../models');
+const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
@@ -22,7 +21,7 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Products
   try {
     const categoryData = await Category.findByPk(req.params.id, {
-      include: [{ model: Product, ProductTag }]
+      include: [{ model: Product }]
     });
 
     if (!categoryData) {
